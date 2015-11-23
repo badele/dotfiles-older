@@ -2,6 +2,9 @@
 [[ $- != *i* ]] && return
 #[[ -z "$TMUX" ]] && exec tmux
 
+# Conf
+HOSTNAME=$(hostname)
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -73,7 +76,7 @@ unsetopt correct_all
 # Customize to your needs...
 
 if [ -d ~/.local/bin ]; then
-  export PATH=~/.local/bin:$PATH
+  export PATH=~/local/$HOSTNAME/bin:~/local/bin:$PATH
 fi
 
 if [ -d /opt/android-studio/bin ]; then
