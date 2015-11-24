@@ -75,7 +75,7 @@ unsetopt correct_all
 
 # Customize to your needs...
 
-if [ -d ~/.local/bin ]; then
+if [ -d ~/local/$HOSTNAME/bin ]; then
   export PATH=~/local/$HOSTNAME/bin:~/local/bin:$PATH
 fi
 
