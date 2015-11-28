@@ -92,3 +92,5 @@ PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
 export SERIALKILLER_SETTINGS=/etc/sk_config.cfg
 export EDITOR="nano"
+
+. ~/.zshrc.private
