@@ -8,4 +8,4 @@ xrandr --output DisplayPort-1 --off --output DisplayPort-0 --off --output HDMI-0
 feh --bg-fill ~/1920x1080-night.png 
 
 killall xfce4-panel
-xfce4-panel&
+xfce4-panel --disable-wm-check &
