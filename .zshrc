@@ -4,6 +4,7 @@
 
 # Conf
 HOSTNAME=$(hostname)
+export PATH=~/local/$HOSTNAME/bin:~/local/bin:$PATH
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -74,10 +75,6 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
 # Customize to your needs...
-
-if [ -d ~/local/$HOSTNAME/bin ]; then
-  export PATH=~/local/$HOSTNAME/bin:~/local/bin:$PATH
-fi
 
 if [ -d /opt/android-studio/bin ]; then
   export PATH=/opt/android-studio/bin:$PATH
