@@ -7,7 +7,7 @@ HOSTNAME=$(hostname)
 
 # Regenerate symlink for ~/local/bin
 find ~/local/bin -type l -delete
-files=$(ls ~/local/$HOSTNAME/bin)
+files=($(ls ~/local/$HOSTNAME/bin))
 for file in $files; do
 	ln -s ~/local/$HOSTNAME/bin/$file ~/local/bin/$file
 done
