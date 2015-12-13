@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo ifconfig wlp2s0 down
+sudo netctl start home.wireless
