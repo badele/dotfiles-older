@@ -4,7 +4,13 @@
 
 # Conf
 HOSTNAME=$(hostname)
-export PATH=~/local/$HOSTNAME/bin:~/local/bin:$PATH
+
+# Regenerate symlink for ~/local/bin
+find ~/local/bin -type l -delete
+files=$(ls ~/local/$HOSTNAME/bin)
+for file in $files; do
+	ln -s ~/local/$HOSTNAME/bin/$file ~/local/bin/$file
+done
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
