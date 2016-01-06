@@ -2,6 +2,11 @@
 [[ $- != *i* ]] && return
 #[[ -z "$TMUX" ]] && exec tmux
 
+
+if [ -f ~/docshare/scripts/private_vars.sh ]; then
+  source ~/docshare/scripts/private_vars.sh
+fi
+
 # Conf
 HOSTNAME=$(hostname)
 
