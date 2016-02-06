@@ -109,6 +109,12 @@ bar {
 	    }
 }
 
+# colors
+# class                        	border  	backgr		text
+client.focused			#859900 	#859900   	#bf3f34
+client.unfocused		#2c2e2f  	#2c2e2f  	#2c2e2f
+client.focused_inactive	        #2c2e2f 	#2c2e2f  	#2c2e2f
+
 # Bruno
 #focus_follows_mouse no
 new_window pixel 1
