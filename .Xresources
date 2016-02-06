@@ -43,7 +43,9 @@ urxvt*scrollBar: false
 *color13: #6c71c4
 *color14: #93a1a1
 *color15: #fdf6e3
-! XTerm*faceName: monospace
-! XTerm*faceSize: 9
-*font: -misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*
-*boldFont: -misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*
+! search font with :
+! fc-list
+! xfd
+! font-manager
+*font: xft: DejaVu Sans Mono for Powerline:style=Book:pixelsize=10:minspace=True
+*boldFont: xft: DejaVu Sans Mono for Powerline:style=Book:size=10:minspace=True

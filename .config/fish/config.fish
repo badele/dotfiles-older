@@ -1,15 +1,19 @@
+set fisher_home ~/.local/share/fisherman
+set fisher_config ~/.config/fisherman
+source $fisher_home/config.fish
+
 # Path to Oh My Fish install.
-set -gx OMF_PATH "/home/badele/.local/share/omf"
+#set -gx OMF_PATH "/home/badele/.local/share/omf"
 
 # Customize Oh My Fish configuration path.
 #set -gx OMF_CONFIG "/home/badele/.config/omf"
 
 # Load oh-my-fish configuration.
-source $OMF_PATH/init.fish
+#source $OMF_PATH/init.fish
 
 # Misc
-set --erase fish_greeting
-set --global --export LANG fr_FR.UTF-8
+#set --erase fish_greeting
+#set --global --export LANG fr_FR.UTF-8
 
 # Start X at login
 if status --is-login

@@ -1,2 +1,5 @@
 # dotfiles-shell
-A shell dotfiles
+
+A shell dotfiles, it use :
+
+ * powerline patched fonts
