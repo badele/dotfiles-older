@@ -10,15 +10,23 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $alt Mod1
+set $i3lock i3lock-wrapper -l
+set $I3status i3blocks
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
+#font pango:DejaVu Sans Mono 10
+
+#font pango:Fira Code Light 10
+
+font pango:Fira Sans 9
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -28,7 +36,26 @@ floating_modifier $mod
 #################################################################
 
 # Lock screen
-bindsym control+mod1+l exec i3lock -c 141414
+bindsym control+$alt+l exec $I3lock
+bindsym $mod+shift+l exec $I3lock
+
+# log out prompt
+set $mode_system (l)ock, (e)logout, (r)eboot, (h)halt
+
+mode "$mode_system" {
+  bindsym l     exec $I3lock, mode "default"
+  bindsym e     exec i3-msg exit
+# bindsym s     exec $I3lock && notify-send "SYSTEM: Hybrid Sleeping..." && systemctl hybrid-sleep, mode "default"
+# bindsym q     exec notify-send "SYSTEM: **quick** Hibernating **quick**..." && systemctl hibernate, mode "default"
+# bindsym h     exec $I3lock && notify-send "SYSTEM: Hibernating..." && systemctl hibernate, mode "default"
+  bindsym r     exec notify-send "SYSTEM: Rebooting..." && systemctl reboot
+  bindsym h 	exec notify-send "SYSTEM: Powering off..." && systemctl poweroff
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
+
+
 
 # Sound
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
@@ -64,10 +91,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+m move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+m move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -133,7 +160,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -166,7 +193,30 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3blocks
         tray_output none
+	position bottom
+	mode dock
+	colors {
+		#background #002b36
+		background #000000
+	}
 }
+
+#bar {
+#        status_command $I3status
+#        position bottom
+#        mode dock
+#        strip_workspace_numbers yes
+#
+#        colors {
+#            statusline  #ECF0F1
+#            background  #2C3E50
+#            focused_workspace  #3498DB #2C3E50 #f5f5f5
+#            active_workspace   #1ABC9C #2C3E50 #BDC3C7
+#            inactive_workspace #2C3E50 #2C3E50 #BDC3C7
+#            urgent_workspace   #f92672 #2C3E50 #BDC3C7
+#        }
+#}
+
 
 # Bruno
 #focus_follows_mouse no
