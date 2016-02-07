@@ -8,6 +8,6 @@ set --global --export LANG fr_FR.UTF-8
 # Start X at login
 if status --is-login
   if test -z "$DISPLAY" -a $XDG_VTNR = 1
-    exec startxfce4 -- -keeptty > ~/.xlog
+    exec startx -- -keeptty > ~/.xlog
   end
 end

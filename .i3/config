@@ -1,18 +1,32 @@
 # i3 config file (v4)
+# wallpaper source => http://wallpaperswide.com/rainy_night_painting-wallpapers.html
 
 # Set vars and parameters
+floating_modifier $mod
 set $mod Mod4
 set $alt Mod1
 set $i3lock i3lock-wrapper -l
 set $I3status i3blocks
-floating_modifier $mod
+set $filemanager thunar
+
+
+# Window parameters
 #font pango:DejaVu Sans Mono for Powerline 10
 font pango:Liberation Mono 10
+new_window pixel 1
+new_float pixel 1
+set $default_gaps_inner 6
+set $default_gaps_outer 2
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
+smart_gaps on
+smart_borders on
 
 # Shortcut
 bindsym $mod+Return exec urxvt
 bindsym $mod+q kill
-bindsym $mod+space exec dmenu_run
+#bindsym $mod+space exec dmenu_run
+bindsym $mod+space exec --no-startup-id rofi -show run
 bindsym $mod+Shift+r restart
 bindsym --release Print exec "maim ~/Downloads/screenshot-full-$(date +%Y-%m-%d).png"
 #bindsym --release Shift+Print exec "maim -i $(xdotool getactivewindow) ~/Downloads/screenshot-windows-$(date +%Y-%m-%d).png"
@@ -34,7 +48,7 @@ bindsym $mod+v split v
 #bindsym $mod+z layout tabbed
 #bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+e exec thunar
+bindsym $mod+d exec $filemanager
 bindsym $mod+f fullscreen
 
 # Misc
@@ -74,10 +88,10 @@ bindsym $mod+Shift+agrave move container to workspace "10: Misc"
 
 
 # Terminate computer session
-set $mode_system (l)ock, (e)logout, (r)eboot, (h)halt
+set $mode_system (l)ogout, (r)eboot, (h)halt
 mode "$mode_system" {
-  bindsym l     exec $I3lock, mode "default"
-  bindsym e     exec i3-msg exit
+  #bindsym l     exec $I3lock, mode "default"
+  bindsym l     exec i3-msg exit
   bindsym r     exec notify-send "SYSTEM: Rebooting..." && systemctl reboot
   bindsym h 	exec notify-send "SYSTEM: Powering off..." && systemctl poweroff
   bindsym Return mode "default"
@@ -121,24 +135,26 @@ client.focused			#859900 	#859900   	#bf3f34
 client.unfocused		#2c2e2f  	#2c2e2f  	#2c2e2f
 client.focused_inactive	        #2c2e2f 	#2c2e2f  	#2c2e2f
 
-# Bruno
+# Start application
+exec --no-startup-id feh --bg-scale ~/.i3/rainy_night_painting-wallpaper-1366x768.jpg
+exec --no-startup-id dunst &
+exec --no-startup-id google-chrome-stable
+exec --no-startup-id xedgewarp -b
+
 #focus_follows_mouse no
-new_window pixel 1
-new_float pixel 1
 assign [class="Gvim"] → "3: Editor"
 assign [class="Emacs"] → "3: Editor"
 assign [class="Firefox"] → "2: Web"
 assign [class="Xchat"] → "4: Misc"
-# exec --no-startup-id xautolock -time 20 -locker "i3lock -c 331111"
-# exec --no-startup-id feh --bg-scale ~/.i3/archlinux.png
+exec --no-startup-id xautolock -time 10 -locker "i3lock-wrapper -l"
 # exec --no-startup-id wicd-client --tray
 # exec --no-startup-id thunar --daemon
 # exec --no-startup-id synclient touchpadoff=1
 # exec --no-startup-id volumeicon
 # exec --no-startup-id parcellite
 #exec --no-startup-id my_emacs_p2k
-exec --no-startup-id google-chrome-stable
 #for_window [class="Nautilus" instance="file_progress"] floating enable
 for_window [class="Skype"] floating enable
 for_window [class="VirtualBox"] floating enable
 #for_window [class="jetbrains-android-studio"] floating enable
+

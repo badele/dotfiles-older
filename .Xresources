@@ -47,5 +47,13 @@ urxvt*scrollBar: false
 ! fc-list
 ! xfd
 ! font-manager
-*font: xft: DejaVu Sans Mono for Powerline:style=Book:pixelsize=10:minspace=True
-*boldFont: xft: DejaVu Sans Mono for Powerline:style=Book:size=10:minspace=True
+urxvt*font: xft: DejaVu Sans Mono for Powerline:style=Book:pixelsize=10:minspace=True
+urxvt*boldFont: xft: DejaVu Sans Mono for Powerline:style=Book:size=10:minspace=True
+! If compton not working
+! urxvt*transparent: true
+! urxvt*shading: 30
+! Urxvt Transparent terminal
+urxvt*depth: 32
+urxvt*background: [60]#0e2e36
+! Rofi dmenu equivalent
+rofi.font: mono 12
