@@ -146,7 +146,7 @@ assign [class="Gvim"] → "3: Editor"
 assign [class="Emacs"] → "3: Editor"
 assign [class="Firefox"] → "2: Web"
 assign [class="Xchat"] → "4: Misc"
-exec --no-startup-id xautolock -time 10 -locker "i3lock-wrapper -l"
+exec --no-startup-id xautolock -time 5 -locker "i3lock-wrapper -l"
 # exec --no-startup-id wicd-client --tray
 # exec --no-startup-id thunar --daemon
 # exec --no-startup-id synclient touchpadoff=1
