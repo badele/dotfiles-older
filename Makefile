@@ -3,7 +3,7 @@ all:
 
 requirements:
 	# I3
-	@yaourt -S i3-gaps compton dunst rofi xedgewarp-git tty-clock
+	@yaourt -S i3-gaps compton dunst rofi xedgewarp-git tty-clock numlockx
 
 	# Editors
 	@yaourt -S nano-syntax-highlighting-git; \
