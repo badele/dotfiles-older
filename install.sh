@@ -1,25 +1,55 @@
 #!/bin/bash
 
-install_requirements() {
-	# I3
-	yaourt -S i3-gaps-git compton dunst rofi xedgewarp-git tty-clock numlockx
-
-	# Editors
-	yaourt -S nano-syntax-highlighting-git
-	yaourt -S geany geany-themes
-
-	# Screenshot
-	yaourt -S maim xdotool slop
-
-	# Fish
-	install  fish
-	chsh -s /usr/bin/fish
-
-	# install fisherman
-	sudo pip2 install virtualfish
-	curl -sL install.fisherman.sh | fish
+needed_packages() {
+    # Check package needed
+    INSTALLED=$(yaourt -Q)
+    TOINSTALL=""
+    for  PACKAGE in $INSTALL; do
+        ISINSTALLED=$(echo "$INSTALLED" | grep "/$PACKAGE")
+        if [ $? -eq 1 ]; then
+            TOINSTALL="$TOINSTALL $PACKAGE"
+        fi
+    done
+    
+    echo "$TOINSTALL"
 }
 
+install_requirements() {
+	# I3
+	INSTALL="i3-gaps-git compton dunst rofi xedgewarp-git tty-clock numlockx"
+    
+    #I3blocks
+    INSTALL="$INSTALL i3blocks acpi bc lm_sensors playerctl sysstat"
+
+	# Editors
+	INSTALL="$INSTALL nano-syntax-highlighting-git"
+	INSTALL="$INSTALL geany geany-themes"
+
+	# Screenshot
+	INSTALL="$INSTALL maim xdotool slop"
+
+    # Install needed packages
+    NEEDED=$(needed_packages)
+    if [  "$NEEDED" != "" ]; then
+        yaourt -S $NEEDED
+    fi
+
+	# Fish
+	INSTALL="fish"
+    NEEDED=$(needed_packages)
+    if [  "$NEEDED" != "" ]; then
+        yaourt -S $NEEDED
+        chsh -s /usr/bin/fish
+    fi
+	
+    # install fisherman
+    if [ ! -d ~/.local/share/fisherman ]; then
+        sudo pip install virtualfish
+        curl -sL install.fisherman.sh | fish
+    fi
+}
+
+# Now in the doftfiles-shell
 powerlinefont:(){
 	# Powerline fonts installation
 	rm -rf /tmp/fonts
