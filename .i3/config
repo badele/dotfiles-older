@@ -6,7 +6,7 @@ floating_modifier $mod
 set $mod Mod4
 set $alt Mod1
 set $i3lock i3lock-wrapper -l
-set $I3status i3blocks -c ~/.i3/i3blocks.conf 2> ~/i3blocks.log
+set $I3status i3blocks -c ~/.i3/i3blocks.conf 2>&1 ~/i3blocks.log
 set $filemanager thunar
 
 

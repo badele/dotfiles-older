@@ -16,3 +16,10 @@ This dotfiles use
   * powerline font (patched powerline font)
   * fisherman (fish plugins)
   * virtualfish (virtualenv plugin)
+
+Boot process
+
+ * autologin console with systemd call getty@tty1.service, 
+ * call .config/fish/config.fish
+ * copy files with computer specification
+ * launch i3
