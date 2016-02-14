@@ -1,5 +1,9 @@
 # dotfiles-shell
 
+Installation
+
+    ./setup.sh
+
 This dotfiles use
 
  * I3 window manager

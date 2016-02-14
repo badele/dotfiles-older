@@ -18,9 +18,6 @@ end
 # Install with pip2 install virtualfish
 eval (python2 -m virtualfish auto_activation compat_aliases) 
 
-# Copy specific computer configuration
-cp ~/.asoundrc.$HOSTNAME ~/.asoundrc
-
 # Start X at login
 if status --is-login
   if test -z "$DISPLAY" -a $XDG_VTNR = 1

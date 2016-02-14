@@ -1,5 +1,7 @@
 #!/bin/bash
 
+HOSTNAME=$(hostname)
+
 needed_packages() {
     # Check package needed
     INSTALLED=$(yaourt -Q)
@@ -15,6 +17,7 @@ needed_packages() {
 }
 
 install_requirements() {
+    echo "- Install Requirements"
 	# I3
 	INSTALL="i3-gaps-git compton dunst rofi xedgewarp-git tty-clock numlockx"
     
@@ -49,7 +52,19 @@ install_requirements() {
     fi
 }
 
-# Now in the doftfiles-shell
+# Sync user computer specific files
+sync_user_computer() {
+    echo "- Install User computer configuration"
+    cp ~/.asoundrc.$HOSTNAME ~/.asoundrc
+}
+
+# Sync user computer specific files
+sync_system_computer() {
+    echo "- Install System computer"
+    sudo rsync -ar ~/system/ /
+}
+
+# For information, now is included in doftfiles-shell
 powerlinefont:(){
 	# Powerline fonts installation
 	rm -rf /tmp/fonts
@@ -59,11 +74,7 @@ powerlinefont:(){
 	./install.sh
 }
 
-if [ "$1" == "" ]; then
-	echo "Please set action (requirements, powerlinefont)"
-	exit 0
-fi
-
-if [ "$1" == "requirements" ]; then
-	install_requirements
-fi
+# Install
+install_requirements
+sync_user_computer
+sync_system_computer
