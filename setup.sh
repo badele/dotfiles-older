@@ -55,6 +55,8 @@ install_requirements() {
 # Sync user computer specific files
 sync_user_computer() {
     echo "- Install User computer configuration"
+    cpp -P ~/.Xresources.def.$HOSTNAME ~/.Xresources
+    xrdb ~/.Xresources
     cp ~/.asoundrc.$HOSTNAME ~/.asoundrc
 }
 
