@@ -19,7 +19,7 @@ needed_packages() {
 install_requirements() {
     echo "- Install Requirements"
 	# I3
-	INSTALL="i3-gaps-git compton dunst rofi xedgewarp-git tty-clock numlockx"
+	INSTALL="i3-gaps-git i3lock-wrapper compton dunst rofi xedgewarp-git tty-clock numlockx"
     
     #I3blocks
     INSTALL="$INSTALL i3blocks acpi bc lm_sensors playerctl sysstat"
