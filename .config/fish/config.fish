@@ -5,6 +5,11 @@ source $fisher_home/config.fish
 # Misc
 set --global --export LANG fr_FR.UTF-8
 set --local  HOSTNAME (hostname)
+
+# Vars
+set --global --export PRIVATE ~/private/projects
+set --global --export WORK ~/work/projects
+
 set --global --export  PATH $PATH /usr/sbin /usr/local/bin ~/local/bin
 
 # Regenerate symlink for ~/local/bin
