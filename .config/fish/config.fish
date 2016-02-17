@@ -21,7 +21,7 @@ end
 
 # Virtualenv
 # Install with pip2 install virtualfish
-eval (python2 -m virtualfish auto_activation compat_aliases) 
+eval (python -m virtualfish auto_activation compat_aliases) 
 
 # Start X at login
 if status --is-login
