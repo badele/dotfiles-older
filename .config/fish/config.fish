@@ -8,7 +8,7 @@ set --local  HOSTNAME (hostname)
 
 # Vars
 set --global --export PRIVATE ~/private/projects
-set --global --export WORK ~/work/projects
+set --global --export TABMO_PROJECTS ~/work/projects
 
 set --global --export  PATH $PATH /usr/sbin /usr/local/bin ~/local/bin
 
