@@ -10,7 +10,7 @@ set --local  HOSTNAME (hostname)
 set --global --export PRIVATE ~/private/projects
 set --global --export TABMO_PROJECTS ~/work/projects
 
-set --global --export  PATH $PATH /usr/sbin /usr/local/bin ~/local/bin
+set --global --export  PATH $PATH /usr/sbin /usr/local/bin ~/local/bin $TABMO_PROJECTS/tabmo-tools
 
 # Regenerate symlink for ~/local/bin
 find ~/local/bin -type l -delete
