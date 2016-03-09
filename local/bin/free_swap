@@ -1,4 +1,6 @@
 #!/bin/bash
 
+notify-send "Start Free swap"
 sudo swapoff -a
 sudo swapon -a
+notify-send "Free swap done"
