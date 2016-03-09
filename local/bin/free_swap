@@ -2,5 +2,10 @@
 
 notify-send "Start Free swap"
 sudo swapoff -a
+
+if [ $? -gt 0 ]; then
+	notify-send -u critical "Cannot free swap"
+fi
+
 sudo swapon -a
 notify-send "Free swap done"
