@@ -21,7 +21,7 @@ end
 
 # Virtualenv
 # Install with pip2 install virtualfish
-eval (python -m virtualfish auto_activation compat_aliases) 
+eval (python2 -m virtualfish auto_activation compat_aliases) 
 
 # SSH Agent
 # https://github.com/tuvistavie/fish-ssh-agent
