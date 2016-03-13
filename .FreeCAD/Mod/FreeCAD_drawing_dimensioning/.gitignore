@@ -1,0 +1,8 @@
+*~
+*.pyc
+crudeDebugger_output*
+crudeDebugger_output/*
+.syncthing.*
+\#*
+testCases_selectionOverlay/
+dxfwrite/
