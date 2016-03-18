@@ -18,18 +18,21 @@ needed_packages() {
 
 install_requirements() {
     echo "- Install Requirements"
-	# I3
-	INSTALL="i3-gaps-git i3lock-wrapper compton dunst rofi xedgewarp-git tty-clock numlockx"
+    # I3
+    INSTALL="i3-gaps-git i3lock-wrapper compton dunst rofi xedgewarp-git tty-clock numlockx"
     
     #I3blocks
     INSTALL="$INSTALL i3blocks acpi bc lm_sensors playerctl sysstat"
 
-	# Editors
-	INSTALL="$INSTALL nano-syntax-highlighting-git"
-	INSTALL="$INSTALL geany geany-themes"
+    # Editors
+    INSTALL="$INSTALL nano-syntax-highlighting-git"
+    INSTALL="$INSTALL geany geany-themes"
 
-	# Screenshot
-	INSTALL="$INSTALL maim xdotool slop"
+    # Screenshot
+    INSTALL="$INSTALL maim xdotool slop"
+    
+    # Misc
+    INSTALL="$INSTALL galculator"
 
     # Install needed packages
     NEEDED=$(needed_packages)
@@ -37,14 +40,14 @@ install_requirements() {
         yaourt -S $NEEDED
     fi
 
-	# Fish
-	INSTALL="fish"
+    # Fish
+    INSTALL="fish"
     NEEDED=$(needed_packages)
     if [  "$NEEDED" != "" ]; then
         yaourt -S $NEEDED
         chsh -s /usr/bin/fish
     fi
-	
+
     # install fisherman
     if [ ! -d ~/.local/share/fisherman ]; then
         sudo pip install virtualfish
@@ -68,12 +71,12 @@ sync_system_computer() {
 
 # For information, now is included in doftfiles-shell
 powerlinefont:(){
-	# Powerline fonts installation
-	rm -rf /tmp/fonts
-	cd /tmp
-	git clone https://github.com/powerline/fonts.git
-	cd fonts
-	./install.sh
+    # Powerline fonts installation
+    rm -rf /tmp/fonts
+    cd /tmp
+    git clone https://github.com/powerline/fonts.git
+    cd fonts
+    ./install.sh
 }
 
 # Install
