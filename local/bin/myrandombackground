@@ -1,0 +1,3 @@
+#!/bin/bash
+
+feh --randomize  --bg-scale ~/.i3/pictures/*
