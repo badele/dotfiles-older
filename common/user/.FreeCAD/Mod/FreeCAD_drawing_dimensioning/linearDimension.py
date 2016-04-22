@@ -1,8 +1,7 @@
-
-from dimensioning import *
-import selectionOverlay, previewDimension
+import previewDimension
+import selectionOverlay
 from dimensionSvgConstructor import *
-
+from dimensioning import *
 
 d = DimensioningProcessTracker() #shorthand
 
@@ -167,7 +166,7 @@ def linearDimension_parallels_hide_non_parallel(elementParms, elementViewObject)
     d_ref = d / numpy.linalg.norm(d)
     p = numpy.array([ x1, y1] )
     def hideFun( gi ):
-        if isinstance(gi,selectionOverlay.LineSelectionGraphicsItem):
+        if isinstance(gi, selectionOverlay.LineSelectionGraphicsItem):
             if gi.elementParms <> elementParms:
                 x1,y1,x2,y2 = [ gi.elementParms[k] for k in [ 'x1', 'y1', 'x2', 'y2' ] ]
                 d = numpy.array([ x2 - x1, y2 - y1] )
@@ -177,7 +176,7 @@ def linearDimension_parallels_hide_non_parallel(elementParms, elementViewObject)
                     offset =  numpy.array([ x1, y1] ) - p
                     if abs(numpy.dot(d_rotated, offset)) > 10**-6: #then not colinear
                         return False
-        elif isinstance(gi,selectionOverlay.PointSelectionGraphicsItem):
+        elif isinstance(gi, selectionOverlay.PointSelectionGraphicsItem):
             return False
         return True 
     selectionOverlay.hideSelectionGraphicsItems(hideFun)
@@ -188,26 +187,26 @@ def selectDimensioningPoint( event, referer, elementXML, elementParms, elementVi
     referer.lockSelection()
     d.viewScale = 1 / elementXML.rootNode().scaling()
     viewInfo = selectionOverlay.DrawingsViews_info[elementViewObject.Name]
-    if isinstance(referer,selectionOverlay.PointSelectionGraphicsItem) :
+    if isinstance(referer, selectionOverlay.PointSelectionGraphicsItem) :
         if len( d.selections) == 0:
             d.selections.append( PointSelection( elementParms, elementXML, viewInfo ) )
             selectionOverlay.hideSelectionGraphicsItems(
-                lambda gi: isinstance(gi,  selectionOverlay.LineSelectionGraphicsItem)
+                lambda gi: isinstance(gi, selectionOverlay.LineSelectionGraphicsItem)
                 )
         elif isinstance( d.selections[0], PointSelection ):
             d.selections.append( PointSelection( elementParms, elementXML, viewInfo ) )
             d.max_selections = 4
             selectionOverlay.hideSelectionGraphicsItems()
             d.proxy_svgFun = linearDimensionSVG_points
-            previewDimension.initializePreview( d, linearDimension_points_preview, linearDimension_points_clickHandler )
+            previewDimension.initializePreview(d, linearDimension_points_preview, linearDimension_points_clickHandler)
         else : #first selection was a line
             d.selections[0].condensed_args = True
             d.selections.append( PointLinePertubationSelection( elementParms, elementXML, viewInfo, d.selections[0] ) )
             d.max_selections = 4
             selectionOverlay.hideSelectionGraphicsItems()
             d.proxy_svgFun = linearDimensionSVG_parallels
-            previewDimension.removePreviewGraphicItems( False, closeDialog=False ) #required since previewDimension.initializePreview called when line selected
-            previewDimension.initializePreview( d, linearDimension_parallels_preview, linearDimension_parallels_clickHandler )
+            previewDimension.removePreviewGraphicItems(False, closeDialog=False) #required since previewDimension.initializePreview called when line selected
+            previewDimension.initializePreview(d, linearDimension_parallels_preview, linearDimension_parallels_clickHandler)
     else: #then line slected
         if len( d.selections ) == 0: 
             d.selections.append( LineSelection( elementParms, elementXML, viewInfo) )
@@ -215,15 +214,15 @@ def selectDimensioningPoint( event, referer, elementXML, elementParms, elementVi
             d.max_selections = 3
             linearDimension_parallels_hide_non_parallel( elementParms, elementViewObject)
             d.proxy_svgFun = linearDimensionSVG_points
-            previewDimension.initializePreview( d, linearDimension_points_preview, linearDimension_points_clickHandler )
+            previewDimension.initializePreview(d, linearDimension_points_preview, linearDimension_points_clickHandler)
         else:
             d.selections[0].condensed_args = True
             d.selections.append( LineSelection( elementParms, elementXML, viewInfo) )
             d.max_selections = 4
             selectionOverlay.hideSelectionGraphicsItems()
             d.proxy_svgFun = linearDimensionSVG_parallels
-            previewDimension.removePreviewGraphicItems( False, closeDialog=False )
-            previewDimension.initializePreview( d, linearDimension_parallels_preview, linearDimension_parallels_clickHandler )
+            previewDimension.removePreviewGraphicItems(False, closeDialog=False)
+            previewDimension.initializePreview(d, linearDimension_parallels_preview, linearDimension_parallels_clickHandler)
 
 maskBrush  =   QtGui.QBrush( QtGui.QColor(0,160,0,100) )
 maskPen =      QtGui.QPen( QtGui.QColor(0,160,0,100) )
@@ -280,7 +279,7 @@ class LinearDimensionCommand:
             maskHoverPen= line_maskHoverPen, 
             maskBrush = line_maskBrush
             )
-        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems( V.graphicsScene, V.graphicsView, V.width, V.height)
+        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems(V.graphicsScene, V.graphicsView, V.width, V.height)
         
     def GetResources(self): 
         return {

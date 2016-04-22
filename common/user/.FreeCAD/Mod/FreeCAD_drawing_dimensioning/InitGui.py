@@ -1,32 +1,13 @@
-import dimensioning #QtCore.QResource.registerResource happens in there
-
 class DrawingDimensioningWorkbench (Workbench):
     Icon = ':/dd/icons/linearDimension.svg'
     MenuText = 'Drawing Dimensioning'
     def Initialize(self):
-        import linearDimension
-        import linearDimension_stack
-        import deleteDimension
-        import circularDimension
-        import grabPointAdd
-        import textAdd
-        import textEdit
-        import textMove
-        import escapeDimensioning
-        import angularDimension
-        import radiusDimension
-        import centerLines
-        import noteCircle
-        import centerView
-        import toleranceAdd
-        import recomputeDimensions
         from drawing_wb_shortcuts import newpageShortcuts
         self.appendToolbar('Drawing Workbench shortcuts', newpageShortcuts + [
                     'dd_new_drawing_page_preferences',
                     'dd_Drawing_OrthoViews',                    
                     ] )
         # copy the Drawing toolbar
-        import DrawingGui
         self.appendToolbar('Drawing Workbench Commands',["Drawing_NewPage",
                     "Drawing_NewView","Drawing_OrthoViews","Drawing_OpenBrowserView",
                     "Drawing_Annotation","Drawing_Clip","Drawing_Symbol",
@@ -51,9 +32,6 @@ class DrawingDimensioningWorkbench (Workbench):
             'dd_recomputeDimensions',
             ]
         self.appendToolbar('Drawing Dimensioning', commandslist)
-        import unfold
-        import unfold_bending_note
-        import unfold_export_to_dxf
         unfold_cmds = [
             'dd_unfold',
             'dd_bendingNote',

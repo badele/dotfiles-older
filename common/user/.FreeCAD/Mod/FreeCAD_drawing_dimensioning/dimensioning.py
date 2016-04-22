@@ -1,11 +1,13 @@
-import numpy
-import FreeCAD as App
-import FreeCAD, FreeCADGui, Part, os
-from PySide import QtGui, QtCore, QtSvg
-from svgLib_dd import SvgTextRenderer, SvgTextParser
+import os
 import traceback
+
+import FreeCAD as App
+import FreeCADGui
+from PySide import QtGui, QtCore
+
 from grid_dd import gridOptionsGroupBox, dimensioningGrid
 from proxies_dd import *
+from svgLib_dd import SvgTextRenderer
 
 __dir__ = os.path.dirname(__file__)
 iconPath = os.path.join( __dir__, 'Gui','Resources', 'icons' )
@@ -540,7 +542,7 @@ class DimensioningTaskDialog:
     def reject(self): #close button
         import previewDimension
         if hasattr(previewDimension.preview, 'drawingVars'):
-            previewDimension.removePreviewGraphicItems( recomputeActiveDocument = True )
+            previewDimension.removePreviewGraphicItems(recomputeActiveDocument = True)
         else:
             recomputeWithOutViewReset(self.dimensiongProcess.drawingVars )
             FreeCADGui.Control.closeDialog()

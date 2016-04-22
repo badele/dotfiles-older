@@ -6,11 +6,11 @@ Once completed
     $ pyside-uic toleranceDialog.ui > toleranceDialog.py
 '''
 
-from dimensioning import *
-import previewDimension, selectionOverlay 
-import toleranceDialog
-from textEdit import maskBrush, maskPen, maskHoverPen
+import previewDimension
+import selectionOverlay
 from dimensionSvgConstructor import *
+from dimensioning import *
+from textEdit import maskBrush, maskPen, maskHoverPen
 
 d = DimensioningProcessTracker()
 

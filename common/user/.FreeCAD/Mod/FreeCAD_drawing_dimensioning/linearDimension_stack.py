@@ -1,11 +1,12 @@
-
-from dimensioning import *
-import selectionOverlay, previewDimension
-from dimensionSvgConstructor import *
-from linearDimension import linearDimensionSVG_points, linearDimensionSVG_parallels,  linearDimension_parallels_hide_non_parallel, LinearDimensionCommand
 import copy
 
-d = DimensioningProcessTracker() 
+import previewDimension
+import selectionOverlay
+from dimensioning import *
+from linearDimension import linearDimensionSVG_parallels,  linearDimension_parallels_hide_non_parallel, LinearDimensionCommand
+
+
+d = DimensioningProcessTracker()
 
 def linearDimension_stack_SVG( selections, mouse_x, mouse_y, KWs ):
     ref = selections[0]
@@ -92,20 +93,20 @@ def stack_selectDimensioningPoint( event, referer, elementXML, elementParms, ele
             d.selections.append( PointSelection( elementParms, elementXML, viewInfo ) )
             d.selections[-1].condensed_args = True
             selectionOverlay.hideSelectionGraphicsItems(
-                lambda gi: isinstance(gi,  selectionOverlay.LineSelectionGraphicsItem)
+                lambda gi: isinstance(gi, selectionOverlay.LineSelectionGraphicsItem)
                 )
         else:
             d.selections.append( LineSelection( elementParms, elementXML, viewInfo ) )
             linearDimension_parallels_hide_non_parallel( elementParms, elementViewObject)
         d.viewScale = 1 / elementXML.rootNode().scaling()
     else:
-        if isinstance(referer,selectionOverlay.PointSelectionGraphicsItem):
+        if isinstance(referer, selectionOverlay.PointSelectionGraphicsItem):
             d.selections.append( PointSelection( elementParms, elementXML, viewInfo ) )
             d.selections[-1].condensed_args = True
         else:
             d.selections.append( LineSelection( elementParms, elementXML, viewInfo ) )
         if len(d.selections) == 2:
-            previewDimension.initializePreview( d, linearDimension_stack_preview, linearDimension_stack_clickHandler )
+            previewDimension.initializePreview(d, linearDimension_stack_preview, linearDimension_stack_clickHandler)
 
 
 def selections_to_svg_fun_args_linear_stack( selections ):

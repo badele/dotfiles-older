@@ -1,7 +1,8 @@
 # This Python file uses the following encoding: utf-8
-from dimensioning import *
-import selectionOverlay, previewDimension
+import previewDimension
+import selectionOverlay
 from dimensionSvgConstructor import *
+from dimensioning import *
 
 d = DimensioningProcessTracker()
 
@@ -97,23 +98,23 @@ def selectFun( event, referer, elementXML, elementParms, elementViewObject ):
         d.selections.append( LineSelection( elementParms, elementXML, viewInfo) )
         if len(d.selections) == 1:
             for gi in selectionOverlay.graphicItems:
-                if isinstance(gi,  selectionOverlay.PointSelectionGraphicsItem):
+                if isinstance(gi, selectionOverlay.PointSelectionGraphicsItem):
                     gi.hide()
         else: 
             d.max_selections = 4
             selectionOverlay.hideSelectionGraphicsItems()
-            previewDimension.initializePreview( d, angularDimension_points_preview, angularDimension_points_clickHandler )
+            previewDimension.initializePreview(d, angularDimension_points_preview, angularDimension_points_clickHandler)
     else: #user selecting 3 points
         if len(d.selections) == 0: 
             d.selections = [ThreePointAngleSelection()]
             d.max_selections = 3
             for gi in selectionOverlay.graphicItems:
-                if isinstance(gi,  selectionOverlay.LineSelectionGraphicsItem):
+                if isinstance(gi, selectionOverlay.LineSelectionGraphicsItem):
                     gi.hide()
         d.selections[0].addPoint( elementParms, elementXML, viewInfo )
         if len(d.selections[0].points) == 3: 
             selectionOverlay.hideSelectionGraphicsItems()
-            previewDimension.initializePreview( d,  angularDimension_points_preview, angularDimension_points_clickHandler)
+            previewDimension.initializePreview(d, angularDimension_points_preview, angularDimension_points_clickHandler)
 
 class Proxy_angularDimension( Proxy_DimensionObject_prototype ):
      def dimensionProcess( self ):
@@ -159,7 +160,7 @@ class AngularDimension:
             maskBrush = point_maskBrush, #clear
             clearPreviousSelectionItems = False,
             )
-        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems( V.graphicsScene, V.graphicsView, V.width, V.height)
+        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems(V.graphicsScene, V.graphicsView, V.width, V.height)
         
     def GetResources(self): 
         return {

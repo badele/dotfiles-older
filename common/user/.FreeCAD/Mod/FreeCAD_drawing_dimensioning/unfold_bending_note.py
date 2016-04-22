@@ -1,8 +1,9 @@
 # This Python file uses the following encoding: utf-8
 
-from dimensioning import *
-import previewDimension, selectionOverlay 
+import previewDimension
+import selectionOverlay
 from dimensionSvgConstructor import arrowHeadSVG, numpy, directionVector
+from dimensioning import *
 
 d = DimensioningProcessTracker()
 d.registerPreference( 'arrowL1')
@@ -51,7 +52,7 @@ class BendingNoteCommand:
             maskHoverPen=maskHoverPen, 
             maskBrush = maskBrush #clear
             )
-        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems( V.graphicsScene, V.graphicsView, V.width, V.height)
+        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems(V.graphicsScene, V.graphicsView, V.width, V.height)
 
     def selectFun(self, event, referer, elementXML, elementParms, elementViewObject ):
         viewInfo = selectionOverlay.DrawingsViews_info[elementViewObject.Name]

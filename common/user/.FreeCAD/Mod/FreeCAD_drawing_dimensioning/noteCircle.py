@@ -1,7 +1,7 @@
-
-from dimensioning import *
-import selectionOverlay, previewDimension
+import previewDimension
+import selectionOverlay
 from dimensionSvgConstructor import *
+from dimensioning import *
 
 d = DimensioningProcessTracker()
 
@@ -59,7 +59,7 @@ def selectFun( event, referer, elementXML, elementParms, elementViewObject ):
     viewInfo = selectionOverlay.DrawingsViews_info[elementViewObject.Name]
     d.selections = [ PointSelection( elementParms, elementXML, viewInfo ) ]
     selectionOverlay.hideSelectionGraphicsItems()
-    previewDimension.initializePreview( d, noteCircle_preview, noteCircle_clickHandler)
+    previewDimension.initializePreview(d, noteCircle_preview, noteCircle_clickHandler)
 
 class Proxy_noteCircle( Proxy_DimensionObject_prototype ):
      def dimensionProcess( self ):
@@ -89,7 +89,7 @@ class NoteCircle:
             maskHoverPen=maskHoverPen,
             maskBrush = maskBrush
             )
-        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems( V.graphicsScene, V.graphicsView, V.width, V.height)
+        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems(V.graphicsScene, V.graphicsView, V.width, V.height)
 
     def GetResources(self):
         return {
