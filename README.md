@@ -40,5 +40,4 @@ Boot process
 
  * autologin console with systemd call getty@tty1.service, 
  * call .config/fish/config.fish
- * copy files with computer specification
  * launch i3
