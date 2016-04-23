@@ -14,6 +14,10 @@
 git clone git@github.com:badele/dotfiles.git
 cd dotfiles
 ./setup.sh
+
+# Select environment with
+mystow.sh commons
+mystow.sh dell
 ```
 
 This dotfiles use
