@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Set ppp route configuration
-sudo rsync -avr ~/system/etc/ppp/ /etc/ppp/
-
-#Change permission
-sudo chown -R root:root /etc/ppp/ip-up.d/route-to-ppp.sh
-sudo chmod 755 /etc/ppp/ip-up.d/route-to-ppp.sh
