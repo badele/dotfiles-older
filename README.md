@@ -1,11 +1,26 @@
-# dotfiles-shell
 
-Installation
+```
+                ██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
+                ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
+                ██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗
+                ██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║
+                ██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║
+                ╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝
+```
 
-    ./setup.sh
+### Installation
+
+```bash
+git clone git@github.com:badele/dotfiles.git
+cd dotfiles
+./setup.sh
+```
 
 This dotfiles use
 
+ * Dotfiles manager
+  * stow
+  
  * I3 window manager
   * i3-gaps-git ( The I3 next generation )
   * i3blocks ( The i3 status bar next generation )

@@ -12,13 +12,6 @@ set --global --export TABMO_PROJECTS ~/work/projects
 
 set --global --export  PATH $PATH /usr/sbin /usr/local/bin ~/local/bin $TABMO_PROJECTS/tabmo-tools
 
-# Regenerate symlink for ~/local/bin
-find ~/local/bin -type l -delete
-set files (ls ~/local/$HOSTNAME/bin)
-for file in $files; 
-	ln -s ~/local/$HOSTNAME/bin/$file ~/local/bin/$file
-end
-
 # Virtualenv
 # Install with pip2 install virtualfish
 eval (python2 -m virtualfish auto_activation compat_aliases) 

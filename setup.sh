@@ -18,8 +18,11 @@ needed_packages() {
 
 install_requirements() {
     echo "- Install Requirements"
+    # Dotfiles manager
+    INSTALL="stow"
+
     # I3
-    INSTALL="i3-gaps-git i3lock-wrapper compton dunst rofi xedgewarp-git tty-clock numlockx"
+    INSTALL="$INSTALL i3-gaps-git i3lock-wrapper compton dunst rofi xedgewarp-git tty-clock numlockx"
     
     #I3blocks
     INSTALL="$INSTALL i3blocks acpi bc lm_sensors playerctl sysstat"
@@ -56,17 +59,17 @@ install_requirements() {
 }
 
 # Sync user computer specific files
-sync_user_computer() {
+configure_user_computer() {
     echo "- Install User computer configuration"
-    cpp -P ~/.Xresources.def.$HOSTNAME ~/.Xresources
-    xrdb ~/.Xresources
-    cp ~/.asoundrc.$HOSTNAME ~/.asoundrc
+    if [ -f ~/.Xresources.def ]; then
+        cpp -P ~/.Xresources.def ~/.Xresources
+        xrdb ~/.Xresources
+    fi
 }
 
-# Sync user computer specific files
-sync_system_computer() {
-    echo "- Install System computer"
-    sudo rsync -ar ~/system/ /
+# Init commons stow
+init_stow() {
+    ./commons/user/local/bin/mystow.sh commons
 }
 
 # For information, now is included in doftfiles-shell
@@ -81,5 +84,5 @@ powerlinefont:(){
 
 # Install
 install_requirements
-sync_user_computer
-sync_system_computer
+configure_user_computer
+init_stow
