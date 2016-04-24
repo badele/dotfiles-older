@@ -88,7 +88,7 @@ urxvt*boldFont: xft: DejaVu Sans Mono for Powerline:style=Book:size=10:minspace=
 
 ! Urxvt Transparent terminal
 urxvt*depth: 32
-urxvt*background: [60]#0e2e36
+urxvt*background: [75]#0e2e36
 
 ! Rofi dmenu equivalent
 rofi.font: mono 12
