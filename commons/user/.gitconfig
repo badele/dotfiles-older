@@ -1,0 +1,30 @@
+[user]
+    name = badele
+    email = bruno@adele.im
+
+[credential]
+    helper = cache --timeout=3600
+
+[push]
+    default = simple
+
+[core]
+    autocrlf = input
+
+[diff]
+    tool = meld
+
+[difftool]
+    prompt = false
+
+[alias]
+    last = log -1 --stat
+
+    gr1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    gr2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    gr-short = !"git gr1"
+    gr-medium = !"git gr2"
+    gr-verbose = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+    stat = status -sb
+    d = difftool
