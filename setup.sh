@@ -16,6 +16,8 @@ needed_packages() {
     echo "$TOINSTALL"
 }
 
+# Optional
+# mytourbook_bin
 install_requirements() {
     echo "- Install Requirements"
     # Dotfiles manager
@@ -64,6 +66,11 @@ configure_user_computer() {
     if [ -f ~/.Xresources.def ]; then
         cpp -P ~/.Xresources.def ~/.Xresources
         xrdb ~/.Xresources
+    fi
+
+    # For dell computer
+    if [ $HOSTNAME == "dell" ]; then
+        ln -s ~/docshare/documents/Fammily/Bruno/mytourbook ~/.mytourbook
     fi
 }
 
