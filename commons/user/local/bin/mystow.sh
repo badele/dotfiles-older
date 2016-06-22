@@ -24,9 +24,17 @@ if [ $# -ge 1 ]; then
 
     if [ -d "$PWD/$ENV/user" ]; then
         stow -d $PWD/$ENV -t ~ $OPTS user
+
+        if [ -e "$PWD/fix/$ENV/user/postscript.sh" ]; then
+            $PWD/fix/$ENV/user/postscript.sh
+        fi
     fi
 
     if [ -d "$PWD/$ENV/system" ]; then
         sudo stow -d $PWD/$ENV -t / $OPTS system
+
+        if [ -e "$PWD/fix/$ENV/system/postscript.sh" ]; then
+            sudo $PWD/fix/$ENV/system/postscript.sh
+        fi
     fi
 fi
