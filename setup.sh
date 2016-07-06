@@ -29,6 +29,9 @@ install_requirements() {
     #I3blocks
     INSTALL="$INSTALL i3blocks acpi bc lm_sensors playerctl sysstat"
 
+    # XFCE
+    INSTALL="$INSTALL gvfs-mpt"
+    
     # Editors
     INSTALL="$INSTALL nano-syntax-highlighting-git"
     INSTALL="$INSTALL geany geany-themes"
