@@ -30,7 +30,7 @@ install_requirements() {
     INSTALL="$INSTALL i3blocks acpi bc lm_sensors playerctl sysstat"
 
     # XFCE
-    INSTALL="$INSTALL gvfs-mpt"
+    INSTALL="$INSTALL libmtp"
     
     # Editors
     INSTALL="$INSTALL nano-syntax-highlighting-git"

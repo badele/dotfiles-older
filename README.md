@@ -36,7 +36,7 @@ This dotfiles use
   * numlockx (active numlock at boot)
 
 * XFCE
-  * gvfs-mpt (MPT Photos thunar support)   
+  * libmtp (MPT Photos thunar support)   
  
 * Fish shell
   * powerline font (patched powerline font)
