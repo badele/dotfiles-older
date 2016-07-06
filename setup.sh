@@ -56,12 +56,12 @@ install_requirements() {
         chsh -s /usr/bin/fish
     fi
 
-    # install fisherman
+    # Install fisherman requirement
     if [ ! -d ~/.local/share/fisherman ]; then
         sudo pip install virtualfish
-        curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
     fi
-    fisher install simnalamburt/shellder
+    #curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+    #fisher install simnalamburt/shellder
 }
 
 # Sync user computer specific files
