@@ -40,7 +40,7 @@ install_requirements() {
     INSTALL="$INSTALL maim xdotool slop"
     
     # Misc
-    INSTALL="$INSTALL galculator"
+    INSTALL="$INSTALL galculator grc"
 
     # Install needed packages
     NEEDED=$(needed_packages)
@@ -61,7 +61,7 @@ install_requirements() {
         sudo pip2 install virtualfish
     fi
     #curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-    #fisher bobthefish
+    #fisher bobthefish grc ssh-term-helper gitignore
 }
 
 # Sync user computer specific files
