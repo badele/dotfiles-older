@@ -35,7 +35,10 @@ This dotfiles use
   * maim ( Screenshot capture )
   * numlockx (active numlock at boot)
 
- * Fish shell
+* XFCE
+  * gvfs-mpt (MPT Photos thunar support)   
+ 
+* Fish shell
   * powerline font (patched powerline font)
   * fisherman (fish plugins)
   * virtualfish (virtualenv plugin)
