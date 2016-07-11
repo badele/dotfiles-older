@@ -61,7 +61,7 @@ install_requirements() {
         sudo pip2 install virtualfish
     fi
     #curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-    #fisher bobthefish grc ssh-term-helper gitignore
+    #fisher bobthefish grc ssh-term-helper gitignore tuvistavie/fish-ssh-agent
 }
 
 # Sync user computer specific files

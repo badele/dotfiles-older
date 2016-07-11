@@ -1,6 +1,6 @@
-set fisher_home ~/.local/share/fisherman
-set fisher_config ~/.config/fisherman
-source $fisher_home/config.fish
+#set fisher_home ~/.local/share/fisherman
+#set fisher_config ~/.config/fisherman
+#source $fisher_home/config.fish
 
 # Misc
 set --global --export LANG fr_FR.UTF-8
@@ -18,6 +18,7 @@ eval (python2 -m virtualfish auto_activation compat_aliases)
 
 # SSH Agent
 # https://github.com/tuvistavie/fish-ssh-agent
+# fisher tuvistavie/fish-ssh-agent
 if test -z "$SSH_ENV"
     setenv SSH_ENV $HOME/.ssh/environment
 end

@@ -1,1 +1,0 @@
-/home/badele/.config/fisherman/bobthefish/fish_prompt.fish
