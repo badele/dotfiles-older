@@ -72,10 +72,10 @@ configure_user_computer() {
         xrdb ~/.Xresources
     fi
 
-    # For dell computer
-    if [ $HOSTNAME == "dell" ]; then
-        ln -s ~/docshare/documents/Fammily/Bruno/mytourbook ~/.mytourbook
-    fi
+#    # For dell computer
+#    if [ $HOSTNAME == "dell" ]; then
+#        ln -s ~/docshare/documents/Fammily/Bruno/mytourbook ~/.mytourbook
+#    fi
 }
 
 # Init commons stow
