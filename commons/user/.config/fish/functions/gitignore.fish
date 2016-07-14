@@ -1,0 +1,1 @@
+/home/badele/.config/fisherman/gitignore/gitignore.fish
