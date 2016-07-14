@@ -1,7 +1,3 @@
-#set fisher_home ~/.local/share/fisherman
-#set fisher_config ~/.config/fisherman
-#source $fisher_home/config.fish
-
 # Misc
 set --global --export LANG fr_FR.UTF-8
 set --local  HOSTNAME (hostname)
@@ -14,7 +10,7 @@ set --global --export  PATH $PATH /usr/sbin /usr/local/bin ~/local/bin $TABMO_PR
 
 # Virtualenv
 # Install with pip2 install virtualfish
-eval (python2 -m virtualfish auto_activation compat_aliases) 
+eval (python2 -m virtualfish auto_activation compat_aliases)
 
 # SSH Agent
 # https://github.com/tuvistavie/fish-ssh-agent
