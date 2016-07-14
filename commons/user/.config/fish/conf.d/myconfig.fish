@@ -12,18 +12,6 @@ set --global --export  PATH $PATH /usr/sbin /usr/local/bin ~/local/bin $TABMO_PR
 # Install with pip2 install virtualfish
 eval (python2 -m virtualfish auto_activation compat_aliases)
 
-# SSH Agent
-# https://github.com/tuvistavie/fish-ssh-agent
-# fisher tuvistavie/fish-ssh-agent
-if test -z "$SSH_ENV"
-    setenv SSH_ENV $HOME/.ssh/environment
-end
-
-if not __ssh_agent_is_started
-    __ssh_agent_start
-end
-
-
 # Start X at login
 if status --is-login
   if test -z "$DISPLAY" -a $XDG_VTNR = 1
