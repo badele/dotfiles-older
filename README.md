@@ -29,6 +29,7 @@ This dotfiles use
   * i3-gaps-git ( The I3 next generation )
   * i3blocks ( The i3 status bar next generation )
   * compton ( compiz manager )
+  * feh ( background manager )
   * dunst ( lightweigth notification )
   * rofi ( dmenu alternative )
   * xedgewarp (mouse in multi-screen manager )
