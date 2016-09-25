@@ -72,4 +72,7 @@ case $1 in
         "rand")
             showRandomImage
             ;;
+
+        * )
+            feh --bg-scale $BG_FOLDER/$1
     esac
