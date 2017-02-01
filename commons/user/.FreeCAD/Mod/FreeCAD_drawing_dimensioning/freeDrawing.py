@@ -1,5 +1,6 @@
-import previewDimension
 from dimensioning import *
+import previewDimension
+import textAddDialog
 
 dimensioning = DimensioningProcessTracker()
 

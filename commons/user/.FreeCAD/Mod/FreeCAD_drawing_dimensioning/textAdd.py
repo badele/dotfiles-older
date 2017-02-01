@@ -1,7 +1,7 @@
 # This Python file uses the following encoding: utf-8
+from dimensioning import *
 import previewDimension
 from dimensionSvgConstructor import *
-from dimensioning import *
 
 d = DimensioningProcessTracker()
 
@@ -65,7 +65,7 @@ class AddText:
     def Activated(self):
         V = getDrawingPageGUIVars() 
         d.activate( V,  dialogTitle='Add Text', dialogIconPath= ':/dd/icons/textAdd.svg', endFunction=self.Activated )
-        previewDimension.initializePreview(d, addText_preview, addText_clickHandler)
+        previewDimension.initializePreview( d, addText_preview, addText_clickHandler)
         
     def GetResources(self): 
         return {

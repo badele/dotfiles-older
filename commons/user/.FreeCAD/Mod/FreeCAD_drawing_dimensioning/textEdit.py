@@ -12,11 +12,11 @@ dialog.show()
 
 '''
 
-import previewDimension
-import selectionOverlay
-import textAddDialog
 from dimensioning import *
+import selectionOverlay 
+import textAddDialog
 from svgLib_dd import SvgTextParser
+import previewDimension
 
 d = DimensioningProcessTracker()
 
@@ -67,7 +67,7 @@ class EditTextDialogWidget( QtGui.QWidget ):
             FreeCADGui.Control.closeDialog()
         if d.endFunction <> None:
             previewDimension.preview.dimensioningProcessTracker = d
-            previewDimension.timer.start(100) # 100 ms, need some time for dialog to close
+            previewDimension.timer.start( 100 ) # 100 ms, need some time for dialog to close
         
 dialog = EditTextDialogWidget()
 dialogUi = textAddDialog.Ui_Dialog()

@@ -1,5 +1,6 @@
-import previewDimension
+
 from dimensioning import *
+import previewDimension
 
 
 def grabPointDrawSVG( x, y, preview=False): # draw a cross

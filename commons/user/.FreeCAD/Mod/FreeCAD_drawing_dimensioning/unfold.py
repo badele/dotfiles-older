@@ -1,11 +1,11 @@
+from dimensioning import *
+from dimensioning import __dir__
+import previewDimension
+from centerLines import _centerLineSVG
+import dimensionSvgConstructor
 import numpy
 from numpy import pi, sin, cos, arctan2, arcsin, arccos, dot
 from numpy.linalg import norm
-
-import previewDimension
-from centerLines import _centerLineSVG
-from dimensioning import *
-
 dotProduct = numpy.dot
 crossProduct = numpy.cross
 
@@ -328,7 +328,7 @@ class UnfoldCommand:
             d.projection = unfold( selection[0].SubObjects )
             d.taskPanelDialog =  UnfoldTaskPanel()
             FreeCADGui.Control.showDialog( d.taskPanelDialog )
-            previewDimension.initializePreview(d, projectionSvg, clickHandler)
+            previewDimension.initializePreview( d, projectionSvg, clickHandler )
         else:
             QtGui.QMessageBox.information(  QtGui.qApp.activeWindow(), "Info", 'Please select touching faces from the same shape')
     def GetResources(self): 
@@ -380,7 +380,7 @@ class UnfoldTaskPanel:
         return 0x00400000
     
     def reject(self):
-        previewDimension.removePreviewGraphicItems(recomputeActiveDocument = True)
+        previewDimension.removePreviewGraphicItems( recomputeActiveDocument = True )
         FreeCADGui.Control.closeDialog()
 
 

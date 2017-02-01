@@ -1,6 +1,6 @@
-import previewDimension
-import selectionOverlay
+
 from dimensioning import *
+import selectionOverlay, previewDimension 
 
 d = DimensioningProcessTracker()
 
@@ -13,7 +13,7 @@ def deleteDimension( event, referer, elementXML, elementParms, elementViewObject
     FreeCADGui.Control.closeDialog()
     if d.endFunction <> None:
         previewDimension.preview.dimensioningProcessTracker = d
-        previewDimension.timer.start(1)
+        previewDimension.timer.start( 1 )
 
 class deleteAllButton:
     def deleteAllDimensions( self, arg1=None):
@@ -66,7 +66,7 @@ class DeleteDimension:
             maskHoverPen=maskHoverPen, 
             maskBrush = maskBrush
             )
-        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems(V.graphicsScene, V.graphicsView, V.width, V.height)
+        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems( V.graphicsScene, V.graphicsView, V.width, V.height)
         
     def GetResources(self): 
         return {

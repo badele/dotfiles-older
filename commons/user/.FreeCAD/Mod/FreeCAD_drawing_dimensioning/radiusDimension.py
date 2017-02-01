@@ -1,7 +1,7 @@
-import previewDimension
-import selectionOverlay
-from dimensionSvgConstructor import *
+
 from dimensioning import *
+import selectionOverlay, previewDimension
+from dimensionSvgConstructor import *
 
 d = DimensioningProcessTracker()
 
@@ -62,7 +62,7 @@ def selectFun(  event, referer, elementXML, elementParms, elementViewObject ):
     d.viewScale = 1/elementXML.rootNode().scaling()
     d.selections.append( CircularArcSelection( elementParms, elementXML, viewInfo ) )
     selectionOverlay.hideSelectionGraphicsItems()
-    previewDimension.initializePreview(d, radiusDimensionSVG_preview, radiusDimensionSVG_clickHandler)
+    previewDimension.initializePreview( d, radiusDimensionSVG_preview, radiusDimensionSVG_clickHandler)
 
 class Proxy_RadiusDimension( Proxy_DimensionObject_prototype ):
      def dimensionProcess( self ):
@@ -89,7 +89,7 @@ class RadiusDimension:
             maskHoverPen=maskHoverPen,
             maskBrush = QtGui.QBrush() #clear
             )
-        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems(V.graphicsScene, V.graphicsView, V.width, V.height)
+        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems( V.graphicsScene, V.graphicsView, V.width, V.height)
 
     def GetResources(self):
         return {

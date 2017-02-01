@@ -1,13 +1,11 @@
-import os
-import traceback
-
+import numpy
 import FreeCAD as App
-import FreeCADGui
-from PySide import QtGui, QtCore
-
+import FreeCAD, FreeCADGui, Part, os
+from PySide import QtGui, QtCore, QtSvg
+from svgLib_dd import SvgTextRenderer, SvgTextParser
+import traceback
 from grid_dd import gridOptionsGroupBox, dimensioningGrid
 from proxies_dd import *
-from svgLib_dd import SvgTextRenderer
 
 __dir__ = os.path.dirname(__file__)
 iconPath = os.path.join( __dir__, 'Gui','Resources', 'icons' )
@@ -210,9 +208,10 @@ class DimensioningPreference_prototype:
 
 
 class DimensioningPreference_float(DimensioningPreference_prototype):
-    def process_extraKWs(self, increment=1.0, min=0.0):
+    def process_extraKWs(self, increment=1.0, min=0.0, decimals=2):
         self.spinBox_increment = increment
         self.spinBox_min = min
+        self.spinBox_decimals = decimals
     def getDefaultValue(self):
         return self.dd_parms.GetFloat( self.name, self.defaultValue ) 
     def updateDefault(self):
@@ -225,6 +224,7 @@ class DimensioningPreference_float(DimensioningPreference_prototype):
         spinbox.setValue( self.getDefaultValue() )
         spinbox.setMinimum( self.spinBox_min )
         spinbox.setSingleStep( self.spinBox_increment )
+        spinbox.setDecimals(self.spinBox_decimals)
         spinbox.valueChanged.connect( self.valueChanged )
         self.spinbox = spinbox
         return  DimensioningTaskDialog_generate_row_hbox( self.label, spinbox )
@@ -232,10 +232,9 @@ class DimensioningPreference_float(DimensioningPreference_prototype):
         obj.addProperty("App::PropertyFloat", self.name, self.category)
         KWs = self.dimensioningProcess.dimensionConstructorKWs
         setattr( obj, self.name, KWs[ self.name ] )
-        
-
 DimensioningPreferenceClasses["<type 'float'>"] = DimensioningPreference_float
 DimensioningPreferenceClasses["<type 'int'>"] = DimensioningPreference_float
+
 
 class DimensioningPreference_unicode(DimensioningPreference_prototype):
     def getDefaultValue(self):
@@ -440,9 +439,55 @@ class DimensioningPreference_font(DimensioningPreference_color):
         color =  getattr( obj, self.name + '_color')
         KWs[self.name] = SvgTextRenderer(family, size, color)
 
-
 DimensioningPreferenceClasses["font"] = DimensioningPreference_font
 
+class DimensioningPreference_string_list(DimensioningPreference_prototype):
+    def val_to_FreeCAD_parm( self, val ):
+        return '\n'.join(text.encode('utf8') for text in val )
+    def FreeCAD_parm_to_val( self, FreeCAD_parm ):
+        return [ unicode( line, 'utf8' ) for line in FreeCAD_parm.split('\n') ]
+    def getDefaultValue(self):
+        return self.FreeCAD_parm_to_val( self.dd_parms.GetString( self.name, self.val_to_FreeCAD_parm( self.defaultValue ) ) )
+    def updateDefault(self):
+        self.dd_parms.SetString( self.name, self.val_to_FreeCAD_parm( self.dimensioningProcess.dimensionConstructorKWs[ self.name ] ) )
+    def set_textbox_text( self, values ):
+        self.textbox.clear()
+        for v in values:
+            self.textbox.append( str(v) if type(v) == float else v )
+    def revertToDefault( self ):
+        self.set_textbox_text( self.getDefaultValue() )
+    def generateWidget( self, dimensioningProcess ):
+        self.dimensioningProcess = dimensioningProcess
+        self.textbox = QtGui.QTextEdit()
+        self.revertToDefault()
+        self.textbox.textChanged.connect( self.textChanged )
+        return DimensioningTaskDialog_generate_row_hbox( self.label, self.textbox )
+    def textChanged( self, arg1=None):
+        self.dimensioningProcess.dimensionConstructorKWs[ self.name ] = self.textbox.toPlainText().split('\n')
+    def add_properties_to_dimension_object( self, obj ):
+        obj.addProperty("App::PropertyStringList", self.name, self.category)
+        KWs = self.dimensioningProcess.dimensionConstructorKWs
+        setattr( obj, self.name, [ v.encode('utf8') for v in KWs[ self.name ] ] )
+    def get_values_from_dimension_object( self, obj, KWs ):
+        KWs[self.name] = getattr( obj, self.name )
+DimensioningPreferenceClasses['string_list'] = DimensioningPreference_string_list
+
+class DimensioningPreference_float_list(DimensioningPreference_string_list):
+    def val_to_FreeCAD_parm( self, val ):
+        return '\n'.join(map(str, val))
+    def FreeCAD_parm_to_val( self, FreeCAD_parm ):
+        return map(float, FreeCAD_parm.split('\n'))
+    def textChanged( self, arg1=None):
+        try:
+            self.dimensioningProcess.dimensionConstructorKWs[ self.name ] = map(float, [v for v in self.textbox.toPlainText().split('\n') if len(v.strip())>0])
+            #debugPrint(1, str(self.dimensioningProcess.dimensionConstructorKWs[ self.name ]))
+        except:
+            App.Console.PrintError(traceback.format_exc())
+    def add_properties_to_dimension_object( self, obj ):
+        obj.addProperty("App::PropertyFloatList", self.name, self.category)
+        KWs = self.dimensioningProcess.dimensionConstructorKWs
+        setattr( obj, self.name, KWs[ self.name ] )
+DimensioningPreferenceClasses['float_list'] = DimensioningPreference_float_list
 
 class UnitSelectionWidget:
     def __init__(self):
@@ -455,14 +500,15 @@ class UnitSelectionWidget:
             if unit_text == 'Edit->Preference->Unit':
                 #found using App.ParamGet("User parameter:BaseApp/Preferences").Export('/tmp/p3')
                 UserSchema = App.ParamGet("User parameter:BaseApp/Preferences/Units").GetInt("UserSchema")
+                v = App.Units.Quantity(1,App.Units.Length).getUserPreferred()[1]
             else:
                 UserSchema = ['mm','m','inch'].index( unit_text )
-            if UserSchema == 0: #standard (mm/kg/s/degree
-                v = 1.0
-            elif UserSchema == 1: #standard (m/kg/s/degree)
-                v = 1000.0
-            else: #either US customary, or Imperial decimal
-                v = 25.4
+                if UserSchema == 0: #standard (mm/kg/s/degree
+                    v = 1.0
+                elif UserSchema == 1: #standard (m/kg/s/degree)
+                    v = 1000.0
+                else: #either US customary, or Imperial decimal
+                    v = 25.4
         else:
             v = customScaleValue
         return 1.0/v if v <> 0 else 1.0
@@ -542,7 +588,7 @@ class DimensioningTaskDialog:
     def reject(self): #close button
         import previewDimension
         if hasattr(previewDimension.preview, 'drawingVars'):
-            previewDimension.removePreviewGraphicItems(recomputeActiveDocument = True)
+            previewDimension.removePreviewGraphicItems( recomputeActiveDocument = True )
         else:
             recomputeWithOutViewReset(self.dimensiongProcess.drawingVars )
             FreeCADGui.Control.closeDialog()
@@ -699,10 +745,11 @@ def dimensionableObjects ( page ):
     from unfold import Proxy_unfold
     drawingViews = []
     for obj in page.Group:
-        if hasattr(obj, 'ViewResult'):
+        if obj.isDerivedFrom("Drawing::FeatureView"):
             if hasattr(obj, 'Proxy'):
-                if isinstance( obj.Proxy, Proxy_unfold ):
-                        drawingViews.append( obj )
-            else: #assuming some kind of drawing view ...
-                drawingViews.append( obj )
+                # skipping all drawing_dimensioning objects except unfolds
+                if hasattr( obj.Proxy, "dimensionProcess"):
+                    if not isinstance( obj.Proxy, Proxy_unfold ):
+                        continue
+            drawingViews.append( obj )
     return drawingViews

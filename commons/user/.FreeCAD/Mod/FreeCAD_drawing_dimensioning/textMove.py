@@ -1,17 +1,17 @@
-import XMLlib
-import previewDimension
-import selectionOverlay
+
 from dimensioning import *
+import selectionOverlay, previewDimension
+import XMLlib
 
 d = DimensioningProcessTracker()
 
 def moveTextSvg( x, y):
     e = d.elementXML
     xml = e.XML[e.pStart:e.pEnd]
-    xml = XMLlib.replaceParm(xml, 'x', '%f' % x)
-    xml = XMLlib.replaceParm(xml, 'y', '%f' % y)
+    xml = XMLlib.replaceParm(xml, 'x', '%f' % x )
+    xml = XMLlib.replaceParm(xml, 'y', '%f' % y )
     if e.parms.has_key('transform'):
-        xml = XMLlib.replaceParm(xml, 'transform', "rotate(%s %f,%f)" % (d.textRotation, x, y))
+        xml = XMLlib.replaceParm(xml, 'transform', "rotate(%s %f,%f)" % (d.textRotation,x,y) )
     return e.XML[:e.pStart] + xml + e.XML[e.pEnd:]
 
 def placeText( x, y):
@@ -26,13 +26,13 @@ def MoveDimensionText( event, referer, elementXML, elementParms, elementViewObje
     debugPrint(2, 'moving %s' % elementViewObject.Name)
     if elementXML.parms.has_key('transform'):
         transform = elementXML.parms['transform']
-        t = transform[XMLlib.findOffset(transform, 'rotate(', 0):]
+        t = transform[ XMLlib.findOffset(transform,'rotate(',0): ]
         d.textRotation =  XMLlib.splitMultiSep(t, ', ')[0]
         debugPrint(3, 'd.textRotation %s' % d.textRotation)
     else:
         d.textRotation = None
     selectionOverlay.hideSelectionGraphicsItems()
-    previewDimension.initializePreview(d, moveTextSvg, placeText)
+    previewDimension.initializePreview( d, moveTextSvg, placeText )
 
 maskBrush  =   QtGui.QBrush( QtGui.QColor(0,160,0,100) )
 maskPen =      QtGui.QPen( QtGui.QColor(0,160,0,100) )

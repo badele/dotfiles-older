@@ -1,7 +1,7 @@
-import previewDimension
-import selectionOverlay
-from dimensionSvgConstructor import *
+
 from dimensioning import *
+import selectionOverlay, previewDimension
+from dimensionSvgConstructor import *
 from linearDimension import linearDimension_parallels_hide_non_parallel
 
 d = DimensioningProcessTracker( add_viewScale_KW = True )
@@ -68,25 +68,25 @@ def selectFun(  event, referer, elementXML, elementParms, elementViewObject ):
     viewInfo = selectionOverlay.DrawingsViews_info[elementViewObject.Name]
     d.viewScale = elementXML.rootNode().scaling()
     # center line
-    if isinstance(referer, selectionOverlay.PointSelectionGraphicsItem):
+    if isinstance(referer,selectionOverlay.PointSelectionGraphicsItem):
         d.selections = [ PointSelection( elementParms, elementXML, viewInfo, condensed_args=True ) ]
         selectionOverlay.hideSelectionGraphicsItems()
-        previewDimension.initializePreview(d, centerLine_preview, centerLine_clickHandler)
-    elif isinstance(referer, selectionOverlay.LineSelectionGraphicsItem):
+        previewDimension.initializePreview( d, centerLine_preview , centerLine_clickHandler)
+    elif isinstance(referer,selectionOverlay.LineSelectionGraphicsItem):
         if len(d.selections) == 0:
             d.selections = [ TwoLineSelection() ]
             linearDimension_parallels_hide_non_parallel( elementParms, elementViewObject)
             for gi in selectionOverlay.graphicItems:
-                if isinstance(gi, selectionOverlay.PointSelectionGraphicsItem):
+                if isinstance(gi,  selectionOverlay.PointSelectionGraphicsItem):
                     gi.hide()
         d.selections[0].addLine(  elementParms, elementXML, viewInfo )
         if len(d.selections[0].lines) == 2:
             selectionOverlay.hideSelectionGraphicsItems()
-            previewDimension.initializePreview(d, centerLine_preview, centerLine_clickHandler)
+            previewDimension.initializePreview( d, centerLine_preview , centerLine_clickHandler)
     else: #centerlines selection overlay
         d.selections = [ CircularArcSelection( elementParms, elementXML, viewInfo, output_mode = 'xy' ) ]
         selectionOverlay.hideSelectionGraphicsItems()
-        previewDimension.initializePreview(d, centerLine_preview, centerLine_clickHandler)
+        previewDimension.initializePreview( d, centerLine_preview , centerLine_clickHandler)
 
 class Proxy_CenterLines( Proxy_DimensionObject_prototype ):
      def dimensionProcess( self ):
@@ -115,7 +115,7 @@ class CenterLines:
             maskHoverPen=maskHoverPen, 
             maskBrush = QtGui.QBrush() #clear
             )
-        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems(V.graphicsScene, V.graphicsView, V.width, V.height)
+        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems( V.graphicsScene, V.graphicsView, V.width, V.height)
     def GetResources(self): 
         return {
             'Pixmap' : ':/dd/icons/centerLines.svg', 
@@ -164,7 +164,7 @@ class CenterLine(CenterLines):
             maskHoverPen= line_maskHoverPen, 
             maskBrush = line_maskBrush
             )
-        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems(V.graphicsScene, V.graphicsView, V.width, V.height)
+        selectionOverlay.addProxyRectToRescaleGraphicsSelectionItems( V.graphicsScene, V.graphicsView, V.width, V.height)
 
     def GetResources(self): 
         return {
