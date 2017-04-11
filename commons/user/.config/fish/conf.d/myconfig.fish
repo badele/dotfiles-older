@@ -6,7 +6,7 @@ set --local  HOSTNAME (hostname)
 set --global --export PRIVATE ~/private/projects
 set --global --export TABMO_PROJECTS ~/work/projects
 set --global --export GOPATH ~/private/projects/go 
-
+set --global --export GOBIN ~/local/bin 
 set --global --export  PATH $PATH /usr/sbin /usr/local/bin ~/local/bin $TABMO_PROJECTS/tabmo-tools
 
 # Virtualenv
