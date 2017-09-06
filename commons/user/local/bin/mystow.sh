@@ -17,13 +17,24 @@ fi
 
 
 # Execute stow
-if [ $# -ge 1 ]; then
-    NBARGS=$(($# - 1))
-    OPTS=${@:1:$NBARGS}
-    ENV=${*: -1}
+if [ ! $# -ge 2 ]; then
+    echo "Usage:"
+    echo "$0 simulate commons"
+    echo "$0 apply dell"
+    exit 0
+else
+    NBARGS=$(($# - 2))
+    OPTS=${@:3:$NBARGS}
+    MODE=${@: 1:1}
+    ENV=${@: 2:1}
+
+    SIMULATE=""
+    if [ "$MODE" == "simulate" ]; then
+        SIMULATE="-v --simulate"
+    fi
 
     if [ -d "$PWD/$ENV/user" ]; then
-        stow -d $PWD/$ENV -t ~ $OPTS user
+        stow -d $PWD/$ENV $SIMULATE -t ~ $OPTS user
 
         if [ -e "$PWD/fix/$ENV/user/postscript.sh" ]; then
             $PWD/fix/$ENV/user/postscript.sh
@@ -31,7 +42,7 @@ if [ $# -ge 1 ]; then
     fi
 
     if [ -d "$PWD/$ENV/system" ]; then
-        sudo stow -d $PWD/$ENV -t / $OPTS system
+        sudo stow -d $PWD/$ENV $SIMULATE -t / $OPTS system
 
         if [ -e "$PWD/fix/$ENV/system/postscript.sh" ]; then
             sudo $PWD/fix/$ENV/system/postscript.sh

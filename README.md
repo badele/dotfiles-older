@@ -18,8 +18,8 @@ cd dotfiles
 ./setup.sh
 
 # Select environment with
-mystow.sh commons
-mystow.sh dell
+mystow.sh apply commons
+mystow.sh apply dell
 ```
 
 This dotfiles use
