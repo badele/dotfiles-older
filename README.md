@@ -7,12 +7,13 @@
                 ██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║
                 ╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝
                 
-                                   For Archlinux distribution
+                               For Manjaro/Archlinux distribution
 ```
 
 ### Installation
 
 ```bash
+cd
 git clone git@github.com:badele/dotfiles.git
 cd dotfiles
 ./setup.sh
@@ -28,7 +29,7 @@ This dotfiles use
   * stow
   
  * I3 window manager
-  * i3-gaps-git ( The I3 next generation )
+  * i3-gaps-git ( The i3 next generation )
   * i3blocks ( The i3 status bar next generation )
   * compton ( compiz manager )
   * feh ( background manager )
